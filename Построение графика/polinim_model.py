@@ -15,7 +15,7 @@ training_epochs = 50
 trX = np.linspace(-3, 3, 101)
 
 num_coefficients = 3
-trY_coefficients = [0, 0, 2]    # x^2 + 0*x + 0
+trY_coefficients = [1.5, 1, -0.5]    # [x**0, x**1, x**2]
 trY = 0
 
 for i in range(num_coefficients):
@@ -54,9 +54,12 @@ for epoch in range(training_epochs):
 w_val = sess.run(w)
 print(w_val)
 
+print("\nВеличина неточности")
+print([float(trY_coefficients[i] - w_val[i]) for i in range(num_coefficients)])
+
 sess.close()
 
-plt.scatter(trX, trY)
+# plt.scatter(trX, trY)
 trY2 = 0
 for i in range(num_coefficients):
     trY2 += w_val[i] * np.power(trX, i)
